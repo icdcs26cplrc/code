@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.10)
+
+# Set the project name
+project(ClientServerProject)
+
+# 添加子目录
+add_subdirectory(third_party/jerasure)
+
+# CMakeLists.txt
+include_directories(
+    ${CMAKE_SOURCE_DIR}/third_party/jerasure
+    ${CMAKE_SOURCE_DIR}/third_party/jerasure/include
+)
+
+# Add the executable for the client
+#add_executable(client src/client.cpp)
+
+# Add the executable for the server
+#add_executable(server src/server.cpp)
+
+# Specify the C++ standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)

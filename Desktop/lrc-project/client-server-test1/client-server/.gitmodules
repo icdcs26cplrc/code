@@ -1,0 +1,3 @@
+[submodule "third_party/jerasure"]
+	path = third_party/jerasure
+	url = https://github.com/tsuraan/Jerasure.git
