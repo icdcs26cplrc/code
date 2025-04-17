@@ -50,8 +50,8 @@ void xor_multiple_blocks(const vector<char*>& blocks, char* dest, int size) {
         xor_blocks(blocks[i], dest, size);
     }
 }
-bool decode(int k,int r,int p, char **data_ptrs, char **coding_ptrs, vector<int> erasures, int blocksize, EncodeType encode_type, bool repair) {
-    if (encode_type == azure_lrc)
+bool decode(int k,int r,int p, char **data_ptrs, char **coding_ptrs, vector<int> erasures, int blocksize, std::string encode_type, bool repair) {
+    if (encode_type == "azure_lrc")
     {
          vector<int> matrix((r + p) * k, 0);
         lrc_generate_matrix(k, r, p, matrix.data());
@@ -150,8 +150,8 @@ bool lrc_generate_matrix(int k, int r, int p, int *final_matrix) {
     
     return true;
 }
-bool encode(int k, int r, int p, char **data_ptrs, char **coding_ptrs, int blocksize, EncodeType encode_type) {
-    if (encode_type == azure_lrc)
+bool encode(int k, int r, int p, char **data_ptrs, char **coding_ptrs, int blocksize, std::string encode_type) {
+    if (encode_type == "azure_lrc")
     {
         vector<int> new_matrix(k*(r+p), 0);
         lrc_generate_matrix(k, r, p, new_matrix.data());

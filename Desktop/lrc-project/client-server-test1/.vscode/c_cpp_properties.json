@@ -4,7 +4,10 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/gf-complete/include"
+                "${workspaceFolder}/client-server/third_party/**",
+                "${workspaceFolder}/gf-complete/include",
+                "/opt/homebrew/opt/openssl/include",
+                "${workspaceFolder}/client-server/third_party/asio/asio/include"
             ],
             "defines": [],
             "macFrameworkPath": [
@@ -12,7 +15,8 @@
             ],
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "macos-clang-arm64"
+            "intelliSenseMode": "macos-clang-arm64",
+            "compilerPath": "/usr/bin/clang++"
         }
     ],
     "version": 4
