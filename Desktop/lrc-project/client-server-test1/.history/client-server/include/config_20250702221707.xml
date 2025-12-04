@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setting>
+    <!-- 基础服务地址配置 -->
+    <attribute>
+        <name>client.addr</name>
+        <value>192.168.1.243</value>
+    </attribute>
+
+    <attribute>
+        <name>proxy.addr</name>
+        <value>192.168.0.45</value>
+    </attribute>
+    
+    <attribute>
+        <name>coordinator.addr</name>
+        <value>192.168.1.244</value>
+    </attribute>
+    
+    <!-- 代理节点地址列表 -->
+    <attribute>
+        <name>datanode.addr</name>
+        <value>192.168.1.245</value>
+        <value>192.168.1.246</value>
+        <value>192.168.1.247</value>
+        <value>192.168.1.248</value>
+        <value>192.168.2.138</value>
+        <value>192.168.2.139</value>
+        <value>192.168.2.140</value>
+        <value>192.168.2.141</value>
+        <value>192.168.2.142</value>
+        <value>192.168.2.143</value>
+        <value>192.168.3.136</value>
+        <value>192.168.3.137</value>
+        <value>192.168.3.138</value>
+        <value>192.168.3.139</value>
+        <value>192.168.3.140</value>
+    </attribute>
+
+    <attribute>
+    <name>datanode.ports</name>
+    <value>34567</value>
+    <value>34568</value>
+    <value>34569</value>
+    <value>34570</value>
+    <value>34571</value>
+    <value>34572</value>
+    <value>34573</value>
+    <value>34574</value>
+    <value>34575</value>
+    <value>34576</value>
+    <value>34577</value>
+    <value>34578</value>
+    <value>34579</value>
+    <value>34580</value>
+    <value>34581</value>
+    </attribute>
+    
+    <!-- <attribute>
+        <name>fullnode.addr</name>
+        <value>192.168.0.17</value>
+    </attribute> -->
+    
+    <!-- 端口配置 -->
+    <attribute>
+        <name>client.port</name>
+        <value>12345</value>
+    </attribute>
+    
+    <attribute>
+        <name>coordinator.port</name>
+        <value>12378</value>
+    </attribute>
+    
+    <attribute>
+        <name>proxy.port.base</name>
+        <value>23456</value>
+    </attribute>
+    
+    <attribute>
+        <name>datanode.port.base</name>
+        <value>34567</value>
+    </attribute>
+    
+    <attribute>
+        <name>proxy.port</name>
+        <value>34589</value>
+    </attribute>
+    
+    <attribute>
+        <name>proxy.port.data</name>
+        <value>35645</value>
+    </attribute>
+    
+    <!-- 线程数配置 -->
+    <!-- <attribute>
+        <name>controller.thread.num</name>
+        <value>20</value>
+    </attribute>
+    
+    <attribute>
+        <name>agent.thread.num</name>
+        <value>20</value>
+    </attribute>
+    
+    <attribute>
+        <name>cmddist.thread.num</name>
+        <value>10</value>
+    </attribute>
+    
+    <!-- 本地配置 -->
+    <attribute>
+        <name>local.addr</name>
+        <value>192.168.0.2</value>
+    </attribute>
+    
+    <!-- 目录配置 -->
+    <attribute>
+        <name>block.directory</name>
+        <value>/home/lixl/ParaRC/blkDir</value>
+    </attribute>
+    
+    <attribute>
+        <name>stripestore.directory</name>
+        <value>/home/lixl/ParaRC/stripeStore</value>
+    </attribute>
+    
+    <attribute>
+        <name>tradeoffpoint.directory</name>
+        <value>/home/lixl/ParaRC/tradeoffPoint</value>
+    </attribute>
+    
+    <!-- 运行模式 -->
+    <attribute>
+        <name>pararc.mode</name>
+        <value>standalone</value>
+    </attribute>
+</setting> -->

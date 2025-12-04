@@ -1,0 +1,114 @@
+# 编译器设置
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall -Wextra -O2
+
+# 目录设置 (适应从 src 目录运行)
+SRC_DIR = .
+TARGET_DIR = ../target
+THIRD_PARTY_DIR = ../third_party
+
+# 包含路径
+INCLUDES = -I$(THIRD_PARTY_DIR)/asio/asio/include \
+           -I$(THIRD_PARTY_DIR)/jerasure/include
+
+# 链接库路径和库
+LDFLAGS = -L$(THIRD_PARTY_DIR)/jerasure/build/lib
+LIBS = -lssl -lcrypto -lJerasure
+
+# 通用源文件
+COMMON_SOURCES = ConfigReader.cc socket.cc
+
+# LRC 相关源文件
+LRC_SOURCES = lrc/sep-azure.cc \
+              lrc/lrc_base.cc \
+              lrc/grade-lrc.cc \
+              lrc/azure-lrc.cc \
+              lrc/azure-lrc_1.cc \
+              lrc/optimal-lrc.cc \
+              lrc/uniform-lrc.cc \
+              lrc/unbalanced-lrc.cc
+
+# 目标文件
+DATANODE_TARGET = $(TARGET_DIR)/datanode
+PROXY_TARGET = $(TARGET_DIR)/proxy
+COORDINATOR_TARGET = $(TARGET_DIR)/coordinator
+CLIENT_TARGET = $(TARGET_DIR)/client
+
+# 所有目标
+TARGETS = $(DATANODE_TARGET) $(PROXY_TARGET) $(COORDINATOR_TARGET) $(CLIENT_TARGET)
+
+# 默认目标
+all: $(TARGETS)
+
+# 创建目标目录
+$(TARGET_DIR):
+	mkdir -p $(TARGET_DIR)
+
+# datanode 编译
+$(DATANODE_TARGET): $(COMMON_SOURCES) datanodemanager.cc datanode.cc | $(TARGET_DIR)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $^ $(LDFLAGS) $(LIBS) -o $@
+
+# proxy 编译
+$(PROXY_TARGET): $(COMMON_SOURCES) proxy.cc $(LRC_SOURCES) | $(TARGET_DIR)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $^ $(LDFLAGS) $(LIBS) -o $@
+
+# coordinator 编译
+$(COORDINATOR_TARGET): $(COMMON_SOURCES) coordinator.cc $(LRC_SOURCES) | $(TARGET_DIR)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $^ $(LDFLAGS) $(LIBS) -o $@
+
+# client 编译
+$(CLIENT_TARGET): $(COMMON_SOURCES) client.cc | $(TARGET_DIR)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $^ $(LDFLAGS) $(LIBS) -o $@
+
+# 清理目标
+clean:
+	rm -rf $(TARGET_DIR)
+
+# 重新编译所有目标
+rebuild: clean all
+
+# 编译单个目标
+datanode: $(DATANODE_TARGET)
+proxy: $(PROXY_TARGET)
+coordinator: $(COORDINATOR_TARGET)
+client: $(CLIENT_TARGET)
+
+# 安装 jerasure 库（如果需要）
+install-jerasure:
+	@echo "Please install jerasure library manually:"
+	@echo "1. cd $(THIRD_PARTY_DIR)/jerasure"
+	@echo "2. mkdir -p build && cd build"
+	@echo "3. cmake .. && make"
+
+# 检查依赖
+check-deps:
+	@echo "Checking dependencies..."
+	@if [ ! -d "$(THIRD_PARTY_DIR)/asio" ]; then \
+		echo "Error: ASIO library not found in $(THIRD_PARTY_DIR)/asio"; \
+		exit 1; \
+	fi
+	@if [ ! -d "$(THIRD_PARTY_DIR)/jerasure" ]; then \
+		echo "Error: Jerasure library not found in $(THIRD_PARTY_DIR)/jerasure"; \
+		exit 1; \
+	fi
+	@if [ ! -f "$(THIRD_PARTY_DIR)/jerasure/build/lib/libjerasure.a" ]; then \
+		echo "Warning: Jerasure library not built. Run 'make install-jerasure' first."; \
+	fi
+	@echo "Dependencies check completed."
+
+# 显示帮助信息
+help:
+	@echo "Available targets:"
+	@echo "  all         - Build all targets (default)"
+	@echo "  datanode    - Build datanode only"
+	@echo "  proxy       - Build proxy only"
+	@echo "  coordinator - Build coordinator only"
+	@echo "  client      - Build client only"
+	@echo "  clean       - Remove all built files"
+	@echo "  rebuild     - Clean and build all"
+	@echo "  check-deps  - Check dependencies"
+	@echo "  install-jerasure - Show jerasure installation instructions"
+	@echo "  help        - Show this help message"
+
+# 声明伪目标
+.PHONY: all clean rebuild datanode proxy coordinator client install-jerasure check-deps help
